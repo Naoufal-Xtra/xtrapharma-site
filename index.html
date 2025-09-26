@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xtrapharma - Distribution pharmaceutique</title>
+  <style>
+    body {
+      margin:0; font-family:Arial, sans-serif; line-height:1.6; color:#333;
+      background:url('general.societe.logo.png') no-repeat center center fixed;
+      background-size:600px auto;
+      opacity:0.98;
+    }
+    header {background:#0a4275e6; color:#fff; padding:10px 20px; position:fixed; top:0; left:0; width:100%; z-index:1000; display:flex; justify-content:space-between; align-items:center;}
+    header h1 {margin:0; font-size:22px; display:flex; align-items:center;}
+    header img {height:40px; margin-right:10px;}
+    nav {display:flex; align-items:center;}
+    nav a {color:#fff; margin:0 10px; text-decoration:none; font-weight:bold; transition:color 0.3s;}
+    nav a:hover {color:#28a745;}
+    .lang-select {margin-left:20px;}
+    .lang-select select {padding:5px; border-radius:5px; border:none;}
+
+    /* Menu hamburger */
+    .menu-toggle {display:none; flex-direction:column; cursor:pointer;}
+    .menu-toggle span {background:#fff; height:3px; width:25px; margin:4px 0; border-radius:2px; transition:0.3s;}
+    .nav-links {display:flex;}
+    .nav-links.active {display:block; position:absolute; top:60px; left:0; width:100%; background:#0a4275; text-align:center;}
+    .nav-links.active a {display:block; margin:15px 0;}
+
+    .hero {
+      position:relative;
+      background:rgba(10,66,117,0.8);
+      color:#fff; text-align:center; padding:120px 20px; margin-top:60px;
+      overflow:hidden;
+    }
+    .hero h2 {font-size:32px; margin-bottom:20px; animation:fadeIn 2s ease;}
+    .btn {background:#28a745; color:#fff; padding:10px 20px; text-decoration:none; border-radius:5px; transition:background 0.3s; display:inline-flex; align-items:center; gap:8px;}
+    .btn:hover {background:#218838;}
+    .hero::after {
+      content:"";
+      background:url('general.societe.logo.png') no-repeat center center;
+      background-size:300px auto;
+      opacity:0.1;
+      position:absolute; top:0; left:0; width:100%; height:100%; z-index:0;
+    }
+    .hero h2, .hero a {position:relative; z-index:1;}
+
+    section {padding:60px 20px; max-width:1000px; margin:auto; background:rgba(255,255,255,0.9); border-radius:10px;}
+    h2 {color:#0a4275; margin-bottom:20px;}
+    .services {display:flex; flex-wrap:wrap; gap:20px; justify-content:center;}
+    .service {flex:1 1 250px; background:#f4f4f4cc; padding:20px; border-radius:10px; text-align:center; transition:transform 0.3s, box-shadow 0.3s;}
+    .service:hover {transform:translateY(-5px); box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+    .contact-form {display:flex; flex-wrap:wrap; gap:20px;}
+    .contact-form form {flex:1;}
+    .contact-form form input, .contact-form form textarea {width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;}
+    .contact-form .info {flex:1;}
+    footer {background:#0a4275e6; color:#fff; text-align:center; padding:20px; margin-top:40px;}
+    footer .btn {margin-top:10px; display:inline-block;}
+    footer img.icon {height:20px;}
+    footer .links {margin-top:15px;}
+    footer .links a {color:#fff; margin:0 10px; text-decoration:underline;}
+    @keyframes fadeIn {from {opacity:0;} to {opacity:1;}}
+
+    /* Responsive */
+    @media (max-width:768px) {
+      nav {display:none;}
+      .menu-toggle {display:flex;}
+      .services {flex-direction:column;}
+      .contact-form {flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>
+      <img src="general.societe.logo.png" alt="Logo Xtrapharma"> <!-- Logo -->
+      Xtrapharma
+    </h1>
+    <div class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#apropos" data-key="menu_about">À propos</a>
+      <a href="#services" data-key="menu_services">Services</a>
+      <a href="#contact" data-key="menu_contact">Contact</a>
+      <div class="lang-select">
+        <select onchange="changeLang(this.value)" id="langSwitcher">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="nl">NL</option>
+        </select>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2 data-key="hero_title">Votre partenaire de confiance en distribution de produits pharmaceutiques</h2>
+    <a href="#contact" class="btn" data-key="hero_btn">Nous contacter</a>
+  </section>
+
+  <section id="apropos">
+    <h2 data-key="about_title">À propos</h2>
+    <p data-key="about_text">Xtrapharma s’engage à fournir des solutions fiables pour la distribution de produits pharmaceutiques en respectant les normes de qualité et de conformité.</p>
+    <ul>
+      <li data-key="about_item1">✅ Conformité réglementaire internationale</li>
+      <li data-key="about_item2">✅ Réseau logistique fiable</li>
+      <li data-key="about_item3">✅ Expertise pharmaceutique</li>
+    </ul>
+  </section>
+
+  <section id="services">
+    <h2 data-key="services_title">Nos Services</h2>
+    <div class="services">
+      <div class="service">
+        <h3 data-key="service1_title">Distribution</h3>
+        <p data-key="service1_text">Distribution basée sur un approvisionnement fiable pour nos clients.</p>
+      </div>
+      <div class="service">
+        <h3 data-key="service2_title">Conformité réglementaire</h3>
+        <p data-key="service2_text">Respect strict des normes et certifications pharmaceutiques.</p>
+      </div>
+      <div class="service">
+        <h3 data-key="service3_title">Traçabilité</h3>
+        <p data-key="service3_text">Suivi transparent des produits du fournisseur au client.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 data-key="contact_title">Contact</h2>
+    <div class="contact-form">
+      <form>
+        <input type="text" placeholder="Nom" required data-key="contact_name">
+        <input type="email" placeholder="Email" required data-key="contact_email">
+        <textarea rows="5" placeholder="Message" required data-key="contact_message"></textarea>
+        <button type="submit" class="btn" data-key="contact_btn">Envoyer</button>
+      </form>
+      <div class="info">
+        <p><strong data-key="contact_hq">Siège social :</strong> Rue de la Paroisse 22, 1130 Bruxelles</p>
+        <p><strong data-key="contact_office">Bureau / Entrepôt :</strong> Rittwegerlaan 50/1, 1830 Machelen</p>
+        <p><strong>Email :</strong> info@xtrapharma.be</p>
+        <p><strong data-key="contact_phone">Téléphone :</strong> 0032 470 62 20 92</p>
+        <iframe src="https://maps.google.com/maps?q=Rue%20de%20la%20Paroisse%2022,%201130%20Bruxelles&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="200" frameborder="0" style="border:0;" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Xtrapharma - <span data-key="footer_rights">Tous droits réservés.</span></p>
+    <a href="conditions-ventes.pdf" target="_blank" class="btn">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" class="icon">
+      <span data-key="footer_conditions">📄 Consulter nos conditions de vente</span>
+    </a>
+    <div class="links">
+      <a href="mentions-legales.html" target="_blank" data-key="footer_mentions">Mentions légales & Politique de confidentialité</a>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      fr: {
+        menu_about: "À propos",
+        menu_services: "Services",
+        menu_contact: "Contact",
+        hero_title: "Votre partenaire de confiance en distribution de produits pharmaceutiques",
+        hero_btn: "Nous contacter",
+        about_title: "À propos",
+        about_text: "Xtrapharma s’engage à fournir des solutions fiables pour la distribution de produits pharmaceutiques en respectant les normes de qualité et de conformité.",
+        about_item1: "✅ Conformité réglementaire internationale",
+        about_item2: "✅ Réseau logistique fiable",
+        about_item3: "✅ Expertise pharmaceutique",
+        services_title: "Nos Services",
+        service1_title: "Distribution",
+        service1_text: "Distribution basée sur un approvisionnement fiable pour nos clients.",
+        service2_title: "Conformité réglementaire",
+        service2_text: "Respect strict des normes et certifications pharmaceutiques.",
+        service3_title: "Traçabilité",
+        service3_text: "Suivi transparent des produits du fournisseur au client.",
+        contact_title: "Contact",
+        contact_name: "Nom",
+        contact_email: "Email",
+        contact_message: "Message",
+        contact_btn: "Envoyer",
+        contact_hq: "Siège social :",
+        contact_office: "Bureau / Entrepôt :",
+        contact_phone: "Téléphone :",
+        footer_rights: "Tous droits réservés.",
+        footer_conditions: "📄 Consulter nos conditions de vente",
+        footer_mentions: "Mentions légales & Politique de confidentialité"
+      },
+      en: {
+        menu_about: "About",
+        menu_services: "Services",
+        menu_contact: "Contact",
+        hero_title: "Your trusted partner in pharmaceutical distribution",
+        hero_btn: "Contact us",
+        about_title: "About",
+        about_text: "Xtrapharma is committed to providing reliable solutions for pharmaceutical distribution while respecting quality and compliance standards.",
+        about_item1: "✅ International regulatory compliance",
+        about_item2: "✅ Reliable logistics network",
+        about_item3: "✅ Pharmaceutical expertise",
+        services_title: "Our Services",
+        service1_title: "Distribution",
+        service1_text: "Distribution based on reliable supply for our clients.",
+        service2_title: "Regulatory compliance",
+        service2_text: "Strict compliance with pharmaceutical standards and certifications.",
+        service3_title: "Traceability",
+        service3_text: "Transparent tracking of products from supplier to client.",
+        contact_title: "Contact",
+        contact_name: "Name",
+        contact_email: "Email",
+        contact_message: "Message",
+        contact_btn: "Send",
+        contact_hq: "Head office:",
+        contact_office: "Office / Warehouse:",
+        contact_phone: "Phone:",
+        footer_rights: "All rights reserved.",
+        footer_conditions: "📄 View our terms of sale",
+        footer_mentions: "Legal notice & Privacy policy"
+      },
+      nl: {
+        menu_about: "Over ons",
+        menu_services: "Diensten",
+        menu_contact: "Contact",
+        hero_title: "Uw betrouwbare partner in farmaceutische distributie",
+        hero_btn: "Contacteer ons",
+        about_title: "Over ons",
+        about_text: "Xtrapharma zet zich in om betrouwbare oplossingen te bieden voor farmaceutische distributie met inachtneming van kwaliteits- en nalevingsnormen.",
+        about_item1: "✅ Internationale regelgevende naleving",
+        about_item2: "✅ Betrouwbaar logistiek netwerk",
+        about_item3: "✅ Farmaceutische expertise",
+        services_title: "Onze Diensten",
+        service1_title: "Distributie",
+        service1_text: "Distributie gebaseerd op een betrouwbare bevoorrading voor onze klanten.",
+        service2_title: "Regelgevende naleving",
+        service2_text: "Strikte naleving van farmaceutische normen en certificeringen.",
+        service3_title: "Traceerbaarheid",
+        service3_text: "Transparante opvolging van producten van leverancier tot klant.",
+        contact_title: "Contact",
+        contact_name: "Naam",
+        contact_email: "E-mail",
+        contact_message: "Bericht",
+        contact_btn: "Verzenden",
+        contact_hq: "Hoofdkantoor:",
+        contact_office: "Kantoor / Magazijn:",
+        contact_phone: "Telefoon:",
+        footer_rights: "Alle rechten voorbehouden.",
+        footer_conditions: "📄 Bekijk onze verkoopvoorwaarden",
+        footer_mentions: "Wettelijke vermeldingen & Privacybeleid"
+      }
+    };
+
+    function changeLang(lang) {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if(translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      document.getElementById('langSwitcher').value = lang;
+    }
+
+    window.onload = () => {
+      const userLang = navigator.language || navigator.userLanguage;
+      if(userLang.startsWith('fr')) changeLang('fr');
+      else if(userLang.startsWith('nl')) changeLang('nl');
+      else changeLang('en');
+    };
+  </script>
+</body>
+</html>
